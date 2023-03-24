@@ -10,4 +10,4 @@ Features:
  - Infinite Scroll
  - Responsive Design (Mobile and Web)
 
-Deployed Site: 
+Deployed Site: https://precious-maamoul-1c6e4d.netlify.app
