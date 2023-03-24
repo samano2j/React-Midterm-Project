@@ -1,4 +1,5 @@
 import React from 'react'
+import { ImArrowLeft } from 'react-icons/im'
 
 export default function AnimeProfile ({imgSrc, title, synopsis, onClick}) {
     return (
@@ -11,7 +12,7 @@ export default function AnimeProfile ({imgSrc, title, synopsis, onClick}) {
             <div className='flex flex-col gap-5'>
                 <h1 className='text-3xl font-bold'>{title}</h1>
                 <p className='text-left'>{synopsis}</p>
-                <button onClick={onClick} className='bg-blue-500 p-2 md:p-5 md:w-2/6 md:self-end text-white font-bold'>Return Home</button>
+                <button onClick={onClick} className='flex justify-center md:w-1/6 bg-blue-500 p-2 md:p-5 md:self-end text-white font-bold'><ImArrowLeft className='text-4xl '/></button>
             </div>
         </div>
     )

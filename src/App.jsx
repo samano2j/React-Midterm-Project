@@ -104,10 +104,20 @@ function App() {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 
-    setCurrentSearch(searchAnime)
-    input = searchAnime
+    if (searchAnime != '') {
+      setCurrentSearch(searchAnime)
+      input = searchAnime
+    }
+      
+    
     setSearchSuggestion('')
-    setAnimeList(newList)
+    if (newList.length == 0) {
+      setAnimeList(<div className='col-span-3'><h1 className='text-6xl h-[25vh]'>No Anime Available</h1>
+      <h1 className='text-6xl h-[25vh]'>Try Another Search</h1></div>)
+    }
+    else {
+      setAnimeList(newList)
+    }
     setAddMore(20)
   }
 
@@ -164,7 +174,7 @@ function App() {
         title={element.attributes.titles.en}
         synopsis={element.attributes.synopsis}
         alt={element.id}
-        onClick={returnHome}/>
+        onClick={returnList}/>
       }
       else {
         return <AnimeProfile 
@@ -173,7 +183,7 @@ function App() {
         title={element.attributes.titles.en_jp}
         synopsis={element.attributes.synopsis}
         alt={element.id}
-        onClick={returnHome}/>
+        onClick={returnList}/>
       }
       
     })
@@ -187,13 +197,11 @@ function App() {
 
   const clickProfile = (e) => {
     setAnimeList('')
-    setCurrentSearch('')
     fetchAnimeProfile(e.target.alt)
   }
 
   const selectSuggestion = (e) => {
     setSearchAnime('')
-    setCurrentSearch('')
     setSearchSuggestion('')
     setAnimeList('')
     fetchAnimeProfile(e.target.children[0].alt)
@@ -228,10 +236,13 @@ function App() {
     }   
   }
 
+  useEffect(() => {
+  }, [currentSearch, animeList])
+  
   const returnList = (e) => {
     setAnimeProfile('')
-    setCurrentSearch(input)
     if(input != '') {
+      setCurrentSearch(input)
       fetchSearchAnime(input)
     }
     else {
@@ -240,9 +251,11 @@ function App() {
   }
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [currentSearch, addMore])
+    if(animeList != '') {
+      window.addEventListener('scroll', handleScroll)
+      return () => window.removeEventListener('scroll', handleScroll)
+    }
+  }, [currentSearch, addMore, animeList])
 
   return (
     <div className='bg-[#0f172a] text-white scroll-smooth m-0 p-0 flex flex-col justify-center items-center w-screen'>
