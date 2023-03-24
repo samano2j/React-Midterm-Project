@@ -252,7 +252,7 @@ function App() {
           <input
             type="text"
             placeholder="Search an Anime"
-            className='border-2 p-2 rounded-l-lg w-5/6'
+            className='border-2 p-2 rounded-l-lg w-5/6 bg-white'
             onChange={updateSearch}
             value={searchAnime}
           />
